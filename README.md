@@ -1,4 +1,7 @@
 
+# 範例連結  
+[https://guahsu.io/Vue-sessionStorage/dist/](https://guahsu.io/Vue-sessionStorage/dist/)  
+  
 # 多頁籤共享sessionStorage並同步至vuex
 
 再vue專案中，如果有使用到vuex來做狀態管理，  
@@ -6,12 +9,12 @@
 這裡紀錄我的解決方案：使多頁籤共享SessionStorage並透過同步達到Vuex資料的持久化。  
 
 ## 常見的登入判斷  
-我們常在頁面判斷(vue-route: beforeEach)中寫下了像這樣的程式，  
+我們常在頁面判斷(vue-route: beforeEach)中寫下了像這樣的程式：
 ```javascript
 router.beforeEach((to, from, next) => {
   const token = // 各種存放token的地方
   // 頁面跳轉前如果沒token就把帶到登入頁
-	if (!token) {
+  if (!token) {
     next({ path: '/login' })
   } else {
     next()
@@ -54,7 +57,7 @@ router.beforeEach((to, from, next) => {
 網路上也有一些譯文，對我幫助非常多，我最終的解決方案也是基於這篇文章來做的。  
   
 ### 主要的作法簡述  
-> 我有寫一個簡單的的登入範例，可以參考 
+> 我有寫一個簡單的的登入範例，可以參考上方的連結  
 
 1. 登入的邏輯取回token時，將token存於sessionStorage中  
 ```javascript
@@ -121,8 +124,8 @@ if (event.key === 'getSessionStorageData') {
   
 > 或許你可能會跟我一樣好奇，新開的頁面為啥會有sessionStorage可以提供複製？  
   
-查詢API([Using the Web Storage API | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API))後才知道，  
-各頁籤只要是同域名，有對storage動作時全部都會被連動，沒有詳閱過API真的還不知道storage事件可以做到同域名的狀態監測。  
+查詢API([Using the Web Storage API | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API))後才知道，各頁籤只要是同域名，  
+有對storage動作時全部都會被連動，沒有詳閱過API真的還不知道storage事件可以做到同域名的狀態監測。  
   
 ### storage事件的測試  
 關於這點可以簡單地做一個測試，隨便開兩個同網域的頁籤後，分別都開啟開發者工具：  
